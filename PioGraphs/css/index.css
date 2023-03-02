@@ -1,0 +1,321 @@
+/*Quitar los estilos generales*/
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*Menu superior*/
+.menu_superior {
+    background: #f7d547;
+    display: block;
+}
+.menu_superior ul {
+    list-style: none;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+}
+.izquierda{
+    float: left; 
+}
+.izquierda img{
+    width:60px;
+    height:60px;
+    padding: 5px;
+    align-content: center;
+}
+.derecha{
+    float: right;
+}
+.menu_superior ul li a {
+    display: block;
+    padding: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+.open {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 0px !important;
+    background-color: #f7d547;
+    outline: none !important;
+}
+.menu_superior ul li a:hover, .open:hover {
+    background: #ecab0f;
+}
+.menu_superior {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+}
+/*Menu herramientas*/
+.menu_superior ul li ul {
+    display: none;
+    position: absolute;
+    background: #f7d547;
+}
+.menu_superior ul li:hover > ul{
+    display: block;
+}
+/*Contactanos*/
+#contactos{
+    max-height: 550px;
+    overflow: auto;
+}
+/*cartas*/
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+.slide-container {
+    margin: auto;
+    text-align: center;
+}
+.wrapper {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.wrapper:focus {
+    outline: 0;
+}
+.p-card {
+    background: white;
+    width: 300px;
+    display: inline-block;
+    margin: auto;
+    border-radius: 19px;
+    position: relative;
+    text-align: center;
+    box-shadow: -1px 15px 30px -12px black;
+    z-index: 9999;
+}
+.card__image {
+    position: relative;
+    height: 230px;
+    margin-bottom: 35px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+.card__image--person {
+    background: url('https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg');
+    background-size: cover;
+}
+.card__image--person img {
+    height: 230px;
+}
+.card__title {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+.card__title--person {
+    color: #4facff;
+}
+.card__name {
+    font-size: 26px;
+    color: black;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+.card__description {
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.card__contact--person {
+    background: #4facff;
+}
+.card__contact--person .one-third {
+    border-right: 1px solid #309eff;
+}
+.card__contact {
+    color: white;
+    font-weight: 700;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+.card__contact .one-third {
+    width: 33%;
+    float: left;
+    padding: 20px 15px;
+    align-items: center;
+}
+.card__contact .one-third img{
+    height: 90%;
+    width: 90%;
+}
+.card__contact .no-border {
+    border-right: none;
+}  
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+/*Cuerpo de la página*/
+body {
+    background-image: url("../resources/index/fondo1.png");
+    background-size: 30%;
+    background-repeat: no-repeat;
+}
+#contenedor {
+    font-family: 'Urbanist', sans-serif;
+    margin: 10%;
+    margin-top: 8%;
+    display: grid;
+    gap: 1% 5%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas: "contenedor-arriba contenedor-arriba"
+                         "linea linea"
+                         "imgGrafica descripcionGrafica"
+                         "descripcionDescarga imgOsito"
+                         "imgDisquete descripcionDisquete";
+}
+.contenedor-arriba{
+    grid-area: contenedor-arriba;
+    display: flex;
+    background-image: url("../resources/inicio/fondoBlanco.png");
+    background-size: 110%;
+    background-repeat: no-repeat; 
+}
+h3 {
+    color:#c0c0c0;
+    font-size: 30px;
+    margin-bottom: 3%;
+}
+p {
+    color:#9c9c9c;
+}
+/*Parte 1*/
+.logo{
+    grid-area: titulo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagen_titulo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: white; */
+}
+.imagen_titulo img{
+    width: 60%;
+}
+.boton {
+    display: flex;
+    align-items:  center;
+    justify-content:  center;
+}
+.boton button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #f7d547;
+    border-width: 0px;
+    width: 180px;
+    padding: 1%;
+    border-radius: 4px;
+    outline: none;
+}
+.boton button:hover{
+    background-color: #ecab0f;
+    transform: scale(1.02);
+    transition: 0.2s ease-in-out;
+}
+.gift {
+    grid-area: gift;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.gift img {
+    width: 90%;
+}
+.linea {
+    grid-area: linea;
+}
+/*Parte 2*/
+.imagenGrafica {
+    grid-area: imgGrafica;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagenGrafica img {
+    width: 70%;
+}
+.contenido1 {
+    grid-area: descripcionGrafica;
+    display: flex;
+    align-items: center;
+}
+/*Parte 3*/
+.contenido2 {
+    grid-area: descripcionDescarga;
+    display: flex;
+    align-items: center;
+}
+/*Parte 4*/
+.imagenDisquete {
+    grid-area: imgDisquete;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imagenDisquete img {
+    width: 60%;
+}
+.contenido3 {
+    grid-area: descripcionDisquete;
+    display: flex;
+    align-items: center;
+}
+ 
+/* Cajitas */
+.row-cajitas{
+    display: flex;
+}
+.contenedor-cajitas{
+    padding: 100px;
+    margin-top: -60px;
+}
+.card:hover {
+    transition: 0.2s ease-in-out;
+    transform: scale(1.02);
+}
+.card:hover img {
+    filter: brightness(95%);
+}
+.card:hover h5 {
+    color: #50bad4;
+}
+.btn-primary{
+    background-color: #92E3A9;
+    border: solid 0px;
+}
+.btn-primary:hover{
+    background-color: #7dd395;
+    border: solid 0px;
+}
+.card-title{
+    color: #838282;
+}
+.card{
+    margin: 0 2% 10% 0;
+}
+a:link, a:visited, a:active {
+    text-decoration:none;
+}

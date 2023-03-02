@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pio Graphs</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!-- Icono -->
+    <link rel="shortcut icon" type="image/x-icon" href="../resources/icon.png">
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500&display=swap" rel="stylesheet">
+    <!--Boostrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css" >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   
+    <!--css-->
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <!--Menú pegajoso - superior-->
+    <div class="menu_superior">
+        <ul>
+            <li class="izquierda"><img src="../resources/icon.png"></li>
+            <li class="izquierda"><a href="">Herramientas</a>
+                <ul>
+                    <li><a href="./grafo.html">Grafos</a></li>
+                </ul>
+            </li>
+            <li class="derecha"><a href="./contactos.html">Desarrolladores</a></li>
+        </ul>
+    </div>
+    <!--Cuerpo de la página-->
+    <div id="contenedor">
+        <!--Parte 1-->
+        <div class="contenedor-arriba">
+            <div class="logo">
+                <div>
+                    <div class="imagen_titulo">
+                        <img src="../resources/index/nombre.png" alt="graphy">
+                    </div>
+                    <div class="boton">
+                        <button> <a style="color: white;" href="#todas-las-herramientas">Empezar ▶</a> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Parte 2-->
+        <div class="imagenGrafica">
+            <img src="../resources/index/grafica.png" alt="Grafica">
+        </div>
+        <div class="contenido1">
+            <div>
+                <h3>¿Qué son los grafos?</h3>
+                <p>
+                    Un grafo consiste de un conjunto finito de puntos llamados vértices y un conjunto finito de aristas, cada una de las cuales conecta dos vértices. Se dice que dos vértices son adyacentes, si están conectados por una arista.
+                </p>
+            </div>
+        </div>
+        <!--Parte 3-->
+        <center>
+            <img src="../resources/index/descarga.gif" width="400" alt="imagenDescarga"> 
+        </center>
+           
+        <div class="contenido2">
+            <div>
+                <h3>Guarda y carga tus Grafos!</h3>
+                <p>
+                    Diseña tus grafos en la aplicación Pio Graphs, orientados a la representación de tu tema seleccionado y trabaja en el todo el tiempo que necesites.
+                </p>
+            </div>
+        </div>
+        <!--Linea de division-->
+        <div class="linea">
+            <hr> 
+        </div>
+    </div>
+    <hr id="todas-las-herramientas" style="margin: 0 80px 50px 80px;">
+    <h5 style="margin-left: 5%; font-size: 2.5rem; color: #817f7f;">Herramienta</h5>
+    <!-- Tarjetitos -->
+    <div class="contenedor-cajitas">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3" >
+                <div class="card" >
+                    <img src="https://images.squarespace-cdn.com/content/v1/5d0c74548c8e8f0001be73ba/1625093768220-DXWZPDITT3RA2Q77VPOF/Rredes+neuronales+grafos.gif" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title text-warning">Grafos</h5>
+                      <p class="card-text"> Grafica tus grafos y genera la matriz de adyacencia</p>
+                      <center>
+                        <div class="containerB">
+                            <a class="button-style" href="./grafo.html" style="--color:#ecda13;">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Iniciar
+                            </a>
+                        </div>
+                      </center>
+                      
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/index.js"></script>
+</html>
