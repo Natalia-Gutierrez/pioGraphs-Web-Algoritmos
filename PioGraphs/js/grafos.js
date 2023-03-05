@@ -153,7 +153,7 @@ function funcionFondoCB() {
         bg.style.background = "none";
         bg.style.backgroundColor = "#ffffff"
     } else {
-        bg.style.backgroundImage = "url('../resources/grafo/cuadricula.jpg')";
+        bg.style.backgroundImage = "url('../resources/images/Imagen1.png')";
     }
 }
 

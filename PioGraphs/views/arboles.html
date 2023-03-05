@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--Dentro de la etiqueta <head> va informacion que mayormente el usuario no puede ver.-->
+
+<head>
+  <meta charset="UTF-8">
+  <title>Grafos - Arboles Binarios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&family=Roboto+Mono&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kreon&family=Laila:wght@500&family=ZCOOL+QingKe+HuangYou&display=swap"
+    rel="stylesheet">
+
+  <!--La siguiente etiqueta permite relacionar el archivo htlm con el css-->
+  <link href="./cardsStyle.sass">
+  <link rel="stylesheet" href="../css/arboles.css">
+
+  <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria jquery-->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+  <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria jsplumb-->
+  <script src="../node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Icono -->
+  <link rel="shortcut icon" type="image/x-icon" href="../resources/modelado.ico">
+</head>
+
+<!-- Navegación principal -->
+<nav>
+  <ul>
+
+    <li style="position: absolute; top: 15px; left: 20px; width: 50px;" id="casita"><a href="./index.html">
+
+      <img style="width: 40px;" src="/resources/images/casita.png" alt="atras">
+    </a></li>
+    <li class="nav-item" id="nombreEmpresa"><img src="../resources\images\modelado.png" alt="logo_graphy"
+        style="height: 50px;">Graphy</li>
+  </ul>
+</nav>
+
+<!--Dentro de la etiqueta <body> va a contenerse todo lo que es el cuerpo de lo que es nuestro html
+  (el usuario lo va a ver).-->
+
+<body>
+  <!-- Contenedor principal -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Div para la caja de herrramientas -->
+      <div class="col-md-2">
+        <div id="toolbox" class="justify-content-center">
+          <h3><strong>Elementos</strong></h3>
+          <br><br>
+          <ul style="list-style: none; margin-left: -30%;">
+            <li>🟦 Para entrada de enlaces</li>
+            <br>
+            <li>🔵 Para salida de enlaces</li>
+          </ul>
+          <div class="control new root" id="cajita">
+            <!-- Nodo raiz -->
+            <img src="../resources/images/viento.png" alt="estacion">
+            <h6 style="margin-top: 2px;">Raiz</h6>
+          </div>
+          <div class="control new left" id="cajita">
+            <!-- Nodo izquierda -->
+            <img src="../resources/images/hojaIzq2.png" alt="estacion" width="70px" height="70px">
+            <h6>Hijo izquierda</h6>
+          </div>
+          <div class="control new right" id="cajita">
+            <!-- Nodo derecha -->
+            <img src="../resources/images/hojaDer.png" alt="estacion" width="45px" height="45px">
+            <h6>Hijo derecha</h6>
+          </div>
+        </div>
+      </div>
+
+      <!-- Div para el diagrama -->
+      <div class="col-md-9">
+        <div id="habilitar-div" class="habilitar">
+          <button id="botonMovilidad" class="btn btn-success" onclick="drag()">Habilitar edición</button>
+        </div>
+        <div id="diagram" class="scroll-bar-vertical scroll-bar-horizontal" style="position: relative;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Checkbox -->
+  <div id="contenedor-cb">
+    <div class="form-check" id="checkbox-fondo">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="funcionFondoCB()">
+      <label class="form-check-label" for="flexCheckDefault">
+        Fondo Blanco
+      </label>
+    </div>
+  </div>
+  <script>
+    function uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+    instance = jsPlumb.getInstance({});
+    instance.setContainer("diagram");
+    instance.bind("ready", function () {
+      // Caracteristicas (estilo) de la conexion.
+      instance.registerConnectionTypes({
+        "green-connection": {
+          paintStyle: { stroke: "green", strokeWidth: 2 },
+          hoverPaintStyle: { stroke: "#67CB57", strokeWidth: 3 },
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
+          overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
+          ]
+        }//----------------------------------------------------------------------------------//
+      });
+
+      // Para que al momento de presionar una conexión se active el boton de eliminar.
+      instance.bind("contextmenu", function (component, event) {
+        if (component.hasClass("jtk-connector")) {
+          event.preventDefault();
+          window.selectedConnection = component;
+          $(`<div class="custom-menu">
+              <button class="btn btn-primary" id="delete-connection" style="margin-bottom: 5px">Eliminar conexión</button>
+              </div>`)
+            .appendTo("body")
+            .css({ top: event.pageY + "px", left: event.pageX + "px" });
+        }
+      });
+
+
+      $("body").on("click", "#delete-connection", function () {
+        instance.deleteConnection(window.selectedConnection);
+        deleteConnection(window.selectedConnection.targetId);
+      });
+
+
+      // Elimina el menu cuando se elimina la conexion o cuando se presiona en otro lugar.
+      $(document).bind("click", function (event) {
+        $("div.custom-menu").remove();
+      });
+
+      // Para eliminar un elemento y sus conexiones. 
+      $("body").on("contextmenu", "#diagram .control", function (event) {
+        event.preventDefault();
+        window.selectedControl = $(this).attr("id");
+        elemento = window.selectedControl;
+        console.log(elemento);
+        $(`<div class='custom-menu'><button class='btn btn-primary' id='delete-control'>Eliminar nodo</button>
+            <button style="margin-top:3px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#valor"
+              onclick = valorActual("${elemento}")>Cambiar valor</button>
+          </div>`)
+          .appendTo("body")
+          .css({ top: event.pageY + "px", left: event.pageX + "px" });
+      });
+
+      // Elimina el menu cuando se elimina la conexion o cuando se presiona en otro lugar.
+      $("body").on("click", "#delete-control", function (event) {
+        nodo = window.selectedControl;
+        instance.remove(nodo); //Elimina del diagrama
+        eliminarNodo(nodo); //Elimina de la base de datos
+      });
+
+      // Para poder arrastrar los elementos al momento de clonarlos
+      $("#toolbox .control").draggable({
+        helper: "clone",
+        containment: "body",
+        appendTo: "#diagram"
+      });
+
+      // Hacer que al momento de clonar un elemento se cree y se pueda arrastrar.
+      $("#diagram").droppable({
+        drop: function (event, ui) {
+          var id = uuidv4();
+          var clone = $(ui.helper).clone(true);
+          clone.attr("id", id);
+          clone.appendTo(this);
+          guardarAtributo(id,0);
+          var root = document.getElementById(id).classList.contains('root');
+          if (root) {
+            if (!existeRoot()) {
+              instance.draggable(id, { containment: true });
+              // Source para root
+              instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+                anchor: "Bottom",
+                isSource: true,
+                maxConnections: 3,
+                connectionType: "green-connection"
+              });
+            } else {
+              instance.remove(id);
+            }
+          }
+          else {
+            instance.draggable(id, { containment: true });
+            // Target hijo
+            instance.addEndpoint(id, {
+              endpoint: ["Rectangle", { width: 10, height: 10 }],
+              anchor: "Top",
+              isTarget: true,
+              maxConnections: 2,
+              connectionType: "green-connection"
+            });
+            // Source hijo
+            instance.addEndpoint(id, {
+              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Bottom",
+              isSource: true,
+              maxConnections: 3,
+              connectionType: "green-connection"
+            });
+          }
+        }
+      })
+
+      instance.bind("connection", function (info) {
+      //Evita que el nodo pueda conectarse con si mismo
+        if (info.sourceId == info.targetId) {
+          instance.deleteConnection(info.connection);
+        }
+        //Primeramente debemos saber si el nodo al que esta llegando la conexion es izquierda o derecha
+        var tipo=0;
+        var clasesNodo=document.getElementById(info.targetId).classList;
+        if(clasesNodo.contains("root")){
+          tipo = 0;
+        }
+        else if(clasesNodo.contains("left")){
+          tipo = 1;
+        }
+        else{
+          tipo=2;
+        }
+        console.log(tipo);
+        var sePuedeConectar = false;
+        if (tieneConexionEntrada(info.targetId)){
+          sePuedeConectar=false;
+        }
+        else if (tipo==1){
+          sePuedeConectar=!hasLeftNode(info);
+        }
+        else if(tipo==2){
+          sePuedeConectar=!hasRightNode(info);
+        }
+        if(casoEspecialConexiones()){
+          sePuedeConectar = true;
+        }
+        if(sePuedeConectar==false){
+          instance.deleteConnection(info.connection);
+          alert("Cada nodo solamente puede tener un nodo hijo izquierdo y otro derecho\n Cada nodo puede tener solamente una conexion de entrada.");
+        }
+        });
+    });
+
+    function guardarValor() {
+      let value = document.getElementById('valorNuevo').value;
+      let key = window.selectedControl;
+      var tipoNodo = document.getElementById(key).classList;
+      var validacion = false;
+      if (tipoNodo.contains("root")){
+        asignarValorNodo(key, value); //Mostramos una etiqueta con el valor 
+        guardarAtributo(key, value); //Guardamos en la base de datos
+      }
+      else{
+        if (tipoNodo.contains("left")){
+          validacion = validateLeftValue(key,parseInt(value,10));
+        }
+        else{
+          validacion = validateRightValue(key,parseInt(value,10));
+        }
+      }
+      if(validacion==true){
+          asignarValorNodo(key, value); //Mostramos una etiqueta con el valor 
+          guardarAtributo(key, value);
+          //$('#mensajeError').html("");
+        }
+        else{
+          window.alert('Error, el valor ingresado no es valido. Intente nuevamente :)');
+          var html=`Hubo un error`;
+          //$('#mensajeError').html(html);
+        }
+    }
+
+    function asignarValorNodo(key, value) {
+      var nodo = document.getElementById(key);
+      cadena = nodo.innerHTML;
+      //Para evitar sobreescribir la etiqueta
+      if (cadena.includes('etiqueta-nodo')) {
+        cadena = cadena.substr(0, cadena.indexOf('<h5'));
+        nodo.innerHTML = cadena;
+      }
+      nodo.innerHTML += `<h5 class="etiqueta-nodo" style="position: absolute; top: 45%;right: 37%; width: 25px; font-size: 15px; background-color: rgb(255, 255, 255); border-radius: 5px; border: 1.5px solid rgb(92, 92, 92);">${value}</h5>`;
+    }
+
+    function existeRoot() {
+      flag = false;
+      var roots = document.getElementsByClassName('root');
+      if (roots.length > 3) {
+        flag = true;
+        window.alert('Solo puedes utilizar un nodo raiz 😔');
+      }
+      return flag;
+    }
+
+    
+
+    //--------------MODIFICAR PARA SUBIR Y GUARDAR----------------------------
+    //TODO Agregar movilidad a los elementos subidos.
+    function drag() {
+      $(".jtk-endpoint").remove();
+      $(".jtk-connector").remove();
+      $(".jtk-overlay").remove();
+      instance.draggable($('.control'));
+      agregarEndPoints();
+      generarConexiones();
+      agregarValoresNodos();
+      eliminarBloqueComentario();
+      document.querySelector("#habilitar-div").classList.remove('habilitar-activo');
+    }
+
+    function eliminarBloqueComentario() {
+      $(".contenedor-conexiones-right").remove();
+      $(".contenedor-conexiones-left").remove();
+    }
+    function generarConexiones() {
+      var htmlDiagram = document.getElementById("diagram");
+      var rightConexiones=htmlDiagram.getElementsByClassName('contenedor-conexiones-right');
+      htmlRight = rightConexiones[0].innerHTML;
+      var leftConexiones=htmlDiagram.getElementsByClassName('contenedor-conexiones-left');
+      htmlLeft = leftConexiones[0].innerHTML;
+
+      var cadenaRight = htmlRight.substring(htmlRight.indexOf('Src:'), htmlRight.indexOf("|-->"));
+      var elementosRight = cadenaRight.split('|');
+      for (n = 0; n < elementosRight.length; n++) {
+        var src = elementosRight[n].substring(elementosRight[n].indexOf(':') + 1, elementosRight[n].indexOf(','));
+        var trg = elementosRight[n].substring(elementosRight[n].indexOf('Trg:') + 4, elementosRight[n].length);
+        crearNuevaFlecha(src, trg);
+      }
+
+      var cadenaLeft = htmlLeft.substring(htmlLeft.indexOf('Src:'), htmlLeft.indexOf("|-->"));
+      var elementosLeft = cadenaLeft.split('|');
+      for (n = 0; n < elementosLeft.length; n++) {
+        var src = elementosLeft[n].substring(elementosLeft[n].indexOf(':') + 1, elementosLeft[n].indexOf(','));
+        var trg = elementosLeft[n].substring(elementosLeft[n].indexOf('Trg:') + 4, elementosLeft[n].length);
+        crearNuevaFlecha(src, trg);
+      }
+
+    }
+
+    function crearNuevaFlecha(src, trg) {
+      console.log(instance.getEndpoints(src));
+      var endpoint1 = instance.getEndpoints(src)[0];
+      console.log(endpoint1);
+      if (!endpoint1.isSource) {
+        endpoint1 = instance.getEndpoints(src)[1];
+      }
+      var endpoint2 = instance.getEndpoints(trg)[0];
+      if (!endpoint2.isTarget) {
+        endpoint2 = instance.getEndpoints(trg)[1];
+      }
+      //console.log(endpoint1 + " " + endpoint2);
+      instance.connect({
+        source: endpoint1,
+        target: endpoint2,
+        type: "green-connection"
+      });
+    }
+
+    function agregarEndPoints() {
+      var nodos = document.getElementsByClassName('control');
+      console.log(nodos);
+      for (i = 3; i < nodos.length; i++) {
+        var raiz = document.getElementById(nodos[i].id).classList.contains('root');
+        if(raiz){
+          instance.addEndpoint(nodos[i].id, {
+            endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+          anchor: "Bottom",
+          isSource: true,
+          maxConnections: 2,
+          connectionType: "green-connection"
+        });
+        }else{
+          instance.addEndpoint(nodos[i].id, {
+          endpoint: ["Rectangle", { width: 10, height: 10 }],
+          anchor: "Top",
+          isTarget: true,
+          maxConnections: 1,
+          connectionType: "green-connection"
+        });
+        instance.addEndpoint(nodos[i].id, {
+          endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+          anchor: "Bottom",
+          isSource: true,
+          maxConnections: 2,
+          connectionType: "green-connection"
+        });
+        }
+
+      }
+      
+    }
+    //--------------------------------------------------------------------------------------------
+    function moverNodos(){
+      instance.draggable($('.control'));
+    }
+  </script>
+
+  <!-- Modal - ventalla emergente - agregar valor a la flecha -->
+  <div class="modal fade" id="valor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Valor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Valor actual del nodo:</label>
+          <input id="valorActual" disabled="true">
+          <label>Ingrese el valor para el nodo:</label>
+          <input id="valorNuevo" type="text" value="" maxlength="9"
+            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+          <div id="mensajeError" style="color:red"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="guardarValor()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Guardar y Subir Graphy-->
+  <!-- Modal - ventana emergente - Nombre del archivo -->
+  <div class="modal fade" id="inputNombreArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nombre del archivo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="contactos" class="modal-body">
+          <label style="margin-left:2vw;">Ingrese el nombre con el que desea guardar el archivo:</label>
+          <input style="margin-left:8vw;" type="text" id="nombreArchivo">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="guardarGrafo()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Botones 🤠-->
+  <button style="margin-left: 20px;" type="button" class="btn btn-primary" id="inorder" data-toggle="modal" data-target="#modalRecorrido" onclick="recorridos()">Recorridos</button>
+  <!-- Modal - recorrido -->
+  <div class="modal fade" id="modalRecorrido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content izquierda">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recorridos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>In-order</h3>
+          <div id="recorridoInOrder">
+          </div>
+          <h3>Pre-order</h3>
+          <div id="recorridoPreOrder">
+          </div>
+          <h3>Post-order</h3>
+          <div id="recorridoPostOrder">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Ingresar cadena -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" id="ingresarCadena" data-target="#inputCadena">Ingresar cadena</button>
+  <!-- Modal - cadena -->
+  <!-- Modal - ingresar cadena -->
+  <div class="modal fade" id="inputCadena" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ingresar cadena de valores</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <strong>Hola!!! Por favor ingresa la cadena de valores para construir tú árbol binario.</strong><br>
+          Recuerda que debes separar los valores con comas (',') sino no se podra construir tu árbol correctamente.
+          <br>No te olvides de revisar que hayas ingresado los valores en el orden que quieres que el árbol se contruya.
+          <br>Y por favor no repitas valores.<br><br>
+          <center>
+            <input onKeypress="if (event.keyCode != 44 && (event.keyCode < 48 || event.keyCode > 57)) event.returnValue = false;" id="cadenaValores" style="width: 50%;">
+          </center>
+        </div>
+        <div id="mensaje" class="habilitar-mensaje">
+          <!--Mensajes de error-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="cadenaSeparar()">Aceptar</button>
+          <button id="cadenaModal" type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal - ingresar recorridos -->
+  <div class="modal fade" id="inputRecorridos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ingresar los recorridos del árbol binario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <strong>Hola!!! Por favor ingresa los recorridos de tú árbol binario.</strong><br>
+          Recuerda que debes separar los valores con comas (',') sino no se podra construir tu árbol correctamente.
+          <br>No te olvides de revisar que hayas ingresado los valores en el orden que quieres que el árbol se contruya.
+          <br>Y por favor no repitas valores.<br>
+          <h3>In-order</h3>
+          <input onKeypress="if (event.keyCode != 44 && (event.keyCode < 48 || event.keyCode > 57)) event.returnValue = false;" id="cadenaInOrder" style="width: 50%;">
+          <h3>Pre-order</h3>
+          <input onKeypress="if (event.keyCode != 44 && (event.keyCode < 48 || event.keyCode > 57)) event.returnValue = false;" id="cadenaPreOrder" style="width: 50%;">
+          <h3>Post-order</h3>
+          <input onKeypress="if (event.keyCode != 44 && (event.keyCode < 48 || event.keyCode > 57)) event.returnValue = false;" id="cadenaPostOrder" style="width: 50%;">
+        </div>
+        <div id="mensajeRecorridos" class="habilitar-mensaje-recorridos">
+          <!--Mensajes de error-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="comprobar()">Aceptar</button>
+          <button id="cadenaRecorridosModal" type="button" class="btn btn-secondary" data-dismiss="modal" style="display: none;">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" id="ingresarRecorridos" data-target="#inputRecorridos">Ingresar recorridos</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo"
+    onclick="">Guardar graphy</button>
+  <button type="button" class="btn btn-primary" id="subirGrafo">Subir graphy</button>
+  <input type="file" id="file-input" style="display: none;" />
+  <button type="button" class="btn btn-primary" id="descargarManual"><a style="color: white !important;" href="../resources/manuales/pdf/ManualDeUsuario_Arboles.pdf"
+      download="ManualArbolesBinarios">Manual</a></button>
+</body>
+<script type="text/javascript" src="../js/arboles.js"></script>
+
+</html>

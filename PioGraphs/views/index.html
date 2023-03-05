@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pio Graphs</title>
+    <title>Graphy</title>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <!-- Icono -->
-    <link rel="shortcut icon" type="image/x-icon" href="../resources/icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../resources/modelado.ico">
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
@@ -26,13 +26,27 @@
     <!--Menú pegajoso - superior-->
     <div class="menu_superior">
         <ul>
-            <li class="izquierda"><img src="../resources/icon.png"></li>
+            <li class="izquierda"><a href="./graphy.html">¿Qué es Graphy?</a></li>
             <li class="izquierda"><a href="">Herramientas</a>
                 <ul>
-                    <li><a href="./grafo.html">Grafos</a></li>
+                    <li><a href="./grafos.html">Grafos</a></li>
+                    <li><a href="./johnson.html">Algoritmo de Johnson</a></li>
+                    <li><a href="./asignacion.html">Algoritmo de Asignación</a></li>
+                    <li><a href="./northwest.html">Algoritmo Northwest</a></li>
+                    <li><a href="./kruskal.html">Algoritmo de Kruskal</a></li>
+                    <li><a href="./dijkstra.html">Algoritmo de Djikstra</a></li>
                 </ul>
             </li>
-            <li class="derecha"><a href="./contactos.html">Desarrolladores</a></li>
+            <li class="izquierda"><a href="">Extras</a>
+                <ul>
+                    <li><a href="./ordenamiento.html">Algoritmos de ordenamiento</a></li>
+                    <li><a href="./arboles.html">Árboles binarios</a></li>
+                </ul>
+            </li>
+            <li class="derecha"><a href="./menuales.html">Manuales</a></li>
+            <li class="derecha">
+                <button type="submit" class="open" data-toggle="modal" data-target="#contactanos" onclick="">Contáctanos</button>
+            </li>
         </ul>
     </div>
     <!--Cuerpo de la página-->
@@ -42,36 +56,50 @@
             <div class="logo">
                 <div>
                     <div class="imagen_titulo">
-                        <img src="../resources/index/nombre.png" alt="graphy">
+                        <img src="../resources/inicio/graphy.png" alt="graphy">
                     </div>
                     <div class="boton">
-                        <button> <a style="color: white;" href="#todas-las-herramientas">Empezar ▶</a> </button>
+                        <button> <a style="color: white;" href="#todas-las-herramientas">Empezar 🤗</a> </button>
                     </div>
                 </div>
             </div>
+            <div class="gift">
+                <img src="../resources/inicio/giftGrafo.gif" alt="GraphyGift"> 
+            </div>
         </div>
         <!--Parte 2-->
-        <div class="imagenGrafica">
-            <img src="../resources/index/grafica.png" alt="Grafica">
+        <div class="imagenConexion">
+            <img src="../resources/inicio/conexion.png" alt="Conexion">
         </div>
         <div class="contenido1">
             <div>
-                <h3>¿Qué son los grafos?</h3>
+                <h3>Crea tus Grafos!</h3>
                 <p>
-                    Un grafo consiste de un conjunto finito de puntos llamados vértices y un conjunto finito de aristas, cada una de las cuales conecta dos vértices. Se dice que dos vértices son adyacentes, si están conectados por una arista.
+                    En matemáticas y ciencias de la computación, un grapho es una estructura que permite modelar problemas de la vida cotidiana, mediante una representación gráfica formada por nodos o vértices que simbolizan a los actores y aristas que sirven para representar los lazos o relaciones entre los actores.
                 </p>
             </div>
         </div>
         <!--Parte 3-->
-        <center>
-            <img src="../resources/index/descarga.gif" width="400" alt="imagenDescarga"> 
-        </center>
-           
+        <div class="imagenOsito">
+            <img src="../resources/inicio/osito.png" alt="Osito">
+        </div>
         <div class="contenido2">
+            <div>
+                <h3>Enfócalos al tema de tu agrado!</h3>
+                <p>
+                    Los graphos permiten estudiar las interrelaciones entre unidades que interactúan unas con otras. Así mismo, un grafo puede representar un único tipo de relación entre los actores (simple), o más de un tipo de relación (múltiple), además cada vinculo o relación puede ser orientado.
+                </p>
+            </div>
+        </div>
+        <!--Parte 4-->
+        <div class="imagenDisquete">
+            <img src="../resources/inicio/disquete.png" alt="Disquete">
+        </div>
+        <div class="contenido3">
             <div>
                 <h3>Guarda y carga tus Grafos!</h3>
                 <p>
-                    Diseña tus grafos en la aplicación Pio Graphs, orientados a la representación de tu tema seleccionado y trabaja en el todo el tiempo que necesites.
+                    Diseña tus grafos en la aplicación Graphy, orientados a la representación de tu tema seleccionado y trabaja en el todo el tiempo que necesites.
                 </p>
             </div>
         </div>
@@ -81,30 +109,112 @@
         </div>
     </div>
     <hr id="todas-las-herramientas" style="margin: 0 80px 50px 80px;">
-    <h5 style="margin-left: 5%; font-size: 2.5rem; color: #817f7f;">Herramienta</h5>
+    <h5 style="margin-left: 5%; font-size: 2.5rem; color: #817f7f;">Todas nuestras herramientas</h5>
     <!-- Tarjetitos -->
     <div class="contenedor-cajitas">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-3" >
                 <div class="card" >
-                    <img src="https://images.squarespace-cdn.com/content/v1/5d0c74548c8e8f0001be73ba/1625093768220-DXWZPDITT3RA2Q77VPOF/Rredes+neuronales+grafos.gif" class="card-img-top" alt="...">
+                    <img src="../resources/inicio/grafos.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title text-warning">Grafos</h5>
-                      <p class="card-text"> Grafica tus grafos y genera la matriz de adyacencia</p>
-                      <center>
-                        <div class="containerB">
-                            <a class="button-style" href="./grafo.html" style="--color:#ecda13;">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                              Iniciar
-                            </a>
-                        </div>
-                      </center>
-                      
+                      <h5 class="card-title">Grafos</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./grafos.html" class="btn btn-primary">Iniciar ✅</a>
                     </div>
                   </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3" >
+                <div class="card">
+                    <img src="../resources/inicio/johnson.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Algoritmo de Johnson</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./johnson.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3" >
+                <div class="card">
+                    <img src="../resources/inicio/asignacion.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Algoritmo de Asignación</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./asignacion.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3" >
+                <div class="card">
+                    <img src="../resources/inicio/northwest.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Algoritmo Northwest</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./northwest.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3" >
+                <div class="card">
+                    <img src="../resources/inicio/ordenamiento.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Ordenamientos</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="../views/ordenamiento.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3" >
+                <div class="card" >
+                    <img src="../resources/inicio/arboles.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Árboles binarios</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./arboles.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3" >
+                <div class="card" >
+                    <img src="../resources/inicio/kruskal.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Algoritmo de Kruskal</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./kruskal.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3" >
+                <div class="card" >
+                    <img src="../resources/inicio/djisktra.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Algoritmo de Djikstra</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="./dijkstra.html" class="btn btn-primary">Iniciar ✅</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal - ventalla emergente - contactanos -->
+    <div class="modal fade" id="contactanos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contáctanos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="contactos" class="modal-body">
+                    <div class="slide-container" id="informacionContactanos">
+                        <!--Lista de integrantes-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+                </div>
             </div>
         </div>
     </div>
