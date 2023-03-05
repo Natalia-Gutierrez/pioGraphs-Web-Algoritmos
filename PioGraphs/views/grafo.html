@@ -87,9 +87,9 @@
             <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">  Con valor de atributo</div>
           </div>
           <ul id="lista-ref1" style="list-style: none; margin-left: -10%;">
-            <li>🟧 Entrada de enlaces</li>
+            <li>◻️ Entrada de enlaces</li>
             <br>
-            <li>🟠 Salida de enlaces</li>
+            <li>⚪ Salida de enlaces</li>
           </ul>
           <!-- Checkbox -->
           
@@ -121,16 +121,16 @@
       // Caracteristicas (estilo) de la conexion.
       instance.registerConnectionTypes({
         "green-connection": {
-          paintStyle: { stroke: "green", strokeWidth: 2 },
-          hoverPaintStyle: { stroke: "#67CB57", strokeWidth: 3 },
-          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
+          paintStyle: { stroke: "orange", strokeWidth: 2 },
+          hoverPaintStyle: { stroke: "#FF8000", strokeWidth: 3 },
+          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
           ["Label", { label: "", location: 0.25 }]]
         }//----------------------------------------------------------------------------------//
         ,"red-connection": {
-          paintStyle: { stroke: "red",strokeWidth: 2 },
-          hoverPaintStyle: { stroke: "#E43B45", strokeWidth: 3 },
-          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
+          paintStyle: { stroke: "black",strokeWidth: 2 },
+          hoverPaintStyle: { stroke: "#000000", strokeWidth: 3 },
+          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
           ["Label", { label: "${label}", location: 0.25 }]]
         }
@@ -286,7 +286,7 @@
       var nodos = document.getElementsByClassName('control');
       for(i=1;i<nodos.length;i++){
         instance.addEndpoint(nodos[i].id, {
-              endpoint: ["Dot", { radius: 2 }],  // rectangle, blank, image
+              endpoint: ["Dot", { radius: 1}],  // rectangle, blank, image
               anchor: "Continuous",
               isSource: true,
               maxConnections: -1,
@@ -294,7 +294,7 @@
             });
             // Punto final del clone.
             instance.addEndpoint(nodos[i].id, {
-              endpoint: ["Rectangle", { width: 2, height: 2 }],
+              endpoint: ["Rectangle", { width: 1, height: 1 }],
               anchor: "Continuous",
               isTarget: true,
               maxConnections: -1,
@@ -382,7 +382,7 @@
       </div>
     </div>
   </div>
-  <!--Guardar y Subir Graphy-->
+  <!--Guardar y Subir-->
   <!-- Modal - ventana emergente - Nombre del archivo -->
   <div class="modal fade" id="inputNombreArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

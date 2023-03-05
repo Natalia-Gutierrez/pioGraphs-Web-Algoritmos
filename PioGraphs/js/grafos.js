@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         html2pdf()
             .set({
                 margin: 1,
-                filename: 'grafy.pdf',
+                filename: 'pioGraphs.pdf',
                 image: {
                     type: 'jpeg',
                     quality: 0.98
@@ -153,7 +153,7 @@ function funcionFondoCB() {
         bg.style.background = "none";
         bg.style.backgroundColor = "#ffffff"
     } else {
-        bg.style.backgroundImage = "url('../resources/images/Imagen1.png')";
+        bg.style.backgroundImage = "url('../resources/grafo/punteada.jpeg')";
     }
 }
 
