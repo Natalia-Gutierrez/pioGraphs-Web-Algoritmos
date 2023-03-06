@@ -76,21 +76,21 @@
       <div class="col-md-2">
         <div id="toolbox" class="justify-content-center">
           <h3 id="elementos"><strong>Elementos para graficar</strong></h3>
-          <br><br>
-          <div class="control new" style="left: 50px; top: 50px" id="cajita">
-            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="110px" height="100px">
-          </div>
-          
-          
-          <div>
-            <div class="flecha"><img src="../resources/grafo/fecha_sinconectar.png" width="30px">  Sin valor de atributo</div>
-            <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">  Con valor de atributo</div>
-          </div>
+          <br><br>     
           <ul id="lista-ref1" style="list-style: none; margin-left: -10%;">
             <li>◻️ Entrada de enlaces</li>
             <br>
             <li>⚪ Salida de enlaces</li>
           </ul>
+          <div class="control new" style="left: 50px; top: 50px" id="cajita">
+            <!-- pollito -->
+            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="70px" height="70px">
+            Pollito
+          </div>
+          <div>
+            <div class="flecha"><img src="../resources/grafo/fecha_sinconectar.png" width="30px">  Sin valor de atributo</div>
+            <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">  Con valor de atributo</div>
+          </div>
           <!-- Checkbox -->
           
           <div id="contenedor-cb" style="margin-top: 10px;">
@@ -144,8 +144,7 @@
           var elemento = window.selectedConnection.sourceId + "" + window.selectedConnection.targetId;
           $(`<div class="custom-menu">
               <button class="btn btn-warning" id="delete-connection" style="margin-bottom: 5px">Eliminar conexión</button>
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#valor"
-              onclick = valorActual("${elemento}")>Cambiar valor</button>
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#valor"onclick = valorActual("${elemento}")>Cambiar valor</button>
               </div>`)
             .appendTo("body")
             .css({ top: event.pageY + "px", left: event.pageX + "px" });
@@ -171,7 +170,12 @@
       $("body").on("contextmenu", "#diagram .control", function (event) {
         event.preventDefault();
         window.selectedControl = $(this).attr("id");
-        $("<div class='custom-menu'><button class='btn btn-warning' id='delete-control'>Eliminar nodo</button></div>")
+        var elemento = window.selectedControl.sourceId + "" + window.selectedControl.targetId;
+        $(`<div class='custom-menu'>
+          <button class='btn btn-warning' id='delete-control'>Eliminar nodo</button>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#valorNodo"
+              onclick = valorActual("${elemento}")>Cambiar valor</button>
+          </div>`)
           .appendTo("body")
           .css({ top: event.pageY + "px", left: event.pageX + "px" });
       });
@@ -318,6 +322,31 @@
           <label>Valor actual de la conexión:</label>
           <input id="valorActual" disabled="true">
           <label>Ingrese el valor para la conexión:</label>
+          <input id="valorNuevo" type="text" value="" maxlength="9"
+            onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="guardarValor()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal - ventalla emergente - agregar valor al nodo -->
+  <div class="modal fade" id="valorNodo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Atributo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Nombre actual del nodo:</label>
+          <input id="valorActual" disabled="true">
+          <label>Ingrese nuevo nombre del nodo:</label>
           <input id="valorNuevo" type="text" value="" maxlength="9"
             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
         </div>
