@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!--Dentro de la etiqueta <head> va informacion que mayormente el usuario no puede ver.
---><head>
-  <meta charset="UTF-8">
-  <title>Grafos Pollitos</title>
 
-  <!--Fonts-->
+<!--Dentro de la etiqueta <head> va informacion que mayormente el usuario no puede ver.-->
+<head>
+  <meta charset="UTF-8">
+  <title>Grafos Puntos de Vacunación</title>
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&family=Roboto+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Kreon&family=Laila:wght@500&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
 
   <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria bootstrap-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria jquery-->
@@ -25,73 +28,78 @@
   <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria jsplumb-->
   <script src="../node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!--Icono -->
-  <link rel="shortcut icon" type="image/x-icon" href="../resources/icon.png">
   
-  <!--La siguiente etiqueta permite relacionar el archivo htlm con el css-->
-  <link rel="stylesheet" href="../css/grafo.css">
+    <!--La siguiente etiqueta permite relacionar el archivo htlm con el css-->
+  <link href="./cardsStyle.sass">
+  <link rel="stylesheet" href="../css/johnson.css">
+
+  <!-- Icono -->
+  <link rel="shortcut icon" type="image/x-icon" href="../resources/modelado.ico">
 </head>
 
-<!--Navegación principal -->
+<!--Navegación principal-->
 <nav>
   <ul>
-    <li style="position: absolute;  left: 20px;" id="casita"><a href="./index.html">
-      <img style="width: 55px; height: 45px;" src="../resources/grafo/casa.png" alt="atras"></a>
+    <li style="position: absolute; top: 15px; left: 20px; width: 50px;" id="casita"><a href="./index.html">
+      <img style="width: 55px; height: 45px;" src="../resources/grafo/casa.png" alt="atras">
+    </a></li>
+    <li>
+      <!--Generar matriz-->
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#matriz" onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>
+      </li>
+    <li>
+      <!--Generar información-->
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo" onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar información</button>
     </li>
     <li>
-      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#matriz"
-        onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>
+      <!--Generar atributos iniciales y finales, holgura y camino critico-->
+    <button type="button" class="btn btn-outline-dark" onclick="calcular('calcularAtributos')">Calcular atributos</button>
     </li>
+    
     <li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo"
-    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar Información</button>
-    </li>
-    <li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="refresh">Borrar todo</button>
-    </li>
-    <li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar</button>
-    </li>
-    <li>
-      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/helpGrafos.pdf" target="_blank" style="color: rgb(255, 255, 255) !important;">Help</a></button>
+      <!--Manual-->
+      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/ManualDeUsuario_Johnson.pdf" target="_blank" style="color: white !important;">Help</a></button>
+      
     </li>
   </ul>
 </nav>
+<!--poner en otro outline o barra de opciones
+<--Guardar Graphy--
+<button type="button" class="btn btn-outline-dark" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar graphy</button>
+<--Subir graphy--
+<button type="button" class="btn btn-outline-dark" id="subirGrafo">Subir graphy</button>
+<input type="file" id="file-input" style="display: none;"/>
+-->
 
+<!--Dentro de la etiqueta <body> va a contenerse todo lo que es el cuerpo de lo que es nuestro html (el usuario lo va a ver).-->
 <body>
   <!-- Contenedor principal -->
   <div class="container-fluid">
     <div class="row">
-      <!-- Div para el diagrama -->
-      
-      <div class="col-md-10">
-        <div id="habilitar-div" class="habilitar">
-          <button id="botonMovilidad" class="btn btn-success" onclick="drag()">Habilitar edición</button>
-        </div>
-        <div id="diagram" style="height: 90vh; position: relative">
-        </div>
-      </div>
       <!-- Div para la caja de herrramientas -->
       <div class="col-md-2">
-        <div id="toolbox" class="justify-content-center">
+        <div id="toolbox" class="justify-content-center" style="height: 77vh !important; position: relative">
           <h3 id="elementos"><strong>Herramientas</strong></h3>
-          <br><br>
-          <ul id="lista-ref1" style="list-style: none; margin-left: -10%;">
+          <ul id="lista-ref1" style="list-style: none;">
             <li>◻️ Entrada de enlaces</li>
             <br>
             <li>⚪ Salida de enlaces</li>
           </ul>
-          <div>
-            <br>
+          <div class="control new" style="left: 50px; top: 50px" id="cajita">
+            <!-- Estacion vacunas -->
+            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="45px" height="45px">
+            <table style="margin: 0 auto; margin-top: 5px;">
+              <tr>
+                <td id="valor1">0</td><td id="valor2">0</td>
+              </tr>
+            </table>
+            Punto de vacunación
+          </div>
+          
+          <div id="flechas" class="justify-content-center" style="left: 50px; top: 50px">
             <div class="flecha"><img src="../resources/grafo/fecha_sinconectar.png" width="30px">Sin valor de atributo</div>
             <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">Con valor de atributo</div>
-          </div>
-          <div class="control new" style="left: 50px; top: 50px" id="cajita">
-            <!-- Nodos Pollitos-->
-            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="70px" height="70px">
-            Pollito
+            <div class="flecha"><img src="../resources/grafo/flecha_critica.png" width="30px">Ruta crítica</div>
           </div>
           <!-- Checkbox -->
           <div id="contenedor-cb">
@@ -105,14 +113,22 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <!-- Div para el diagrama -->
+      <div class="col-md-10">
+        <div id="habilitar-div" class="habilitar">
+          <button id="botonMovilidad" class="btn btn-success" onclick="drag()">Habilitar edición</button>
+        </div>
+        <div id="diagram" style="height: 77vh !important; position: relative">
+          <!-- Div para los nodos y conexiones -->
+        </div>
+      </div>
+    </div>
   </div>
-  
   <script>
-    let refresh = document.getElementById('refresh');
-    refresh.addEventListener('click', _ => {
-                location.reload();
-    })
+    var primerNodoId = "";
     var contador = 1;
+    var cantidadDeNodos = 0;
     // https://stackoverflow.com/a/2117523
     function uuidv4() {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -128,16 +144,23 @@
         "green-connection": {
           paintStyle: { stroke: "orange", strokeWidth: 2 },
           hoverPaintStyle: { stroke: "#FF8000", strokeWidth: 3 },
-          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
           ["Label", { label: "", location: 0.25 }]]
         }//----------------------------------------------------------------------------------//
-        ,"red-connection": {
-          paintStyle: { stroke: "black",strokeWidth: 2 },
+        , "red-connection": {
+          paintStyle: { stroke: "black", strokeWidth: 2 },
           hoverPaintStyle: { stroke: "#000000", strokeWidth: 3 },
-          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
           ["Label", { label: "${label}", location: 0.25 }]]
+        }
+        , "blue-connection": {
+          paintStyle: { stroke: "#FA4CAB", strokeWidth: 2 },
+          hoverPaintStyle: { stroke: "#FA3CAB", strokeWidth: 3 },
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
+          overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
+          ["Label", { label: "", location: 0.25 }]]
         }
       });
 
@@ -176,7 +199,7 @@
       $("body").on("contextmenu", "#diagram .control", function (event) {
         event.preventDefault();
         window.selectedControl = $(this).attr("id");
-        $("<div class='custom-menu'><button class='btn btn-primary' id='delete-control'>Eliminar nodo</button></div>")
+        $("<div class='custom-menu'><button class='btn btn-warning' id='delete-control'>Eliminar nodo</button></div>")
           .appendTo("body")
           .css({ top: event.pageY + "px", left: event.pageX + "px" });
       });
@@ -186,6 +209,7 @@
         nodo = window.selectedControl;
         instance.remove(nodo);
         eliminarNodo(nodo);
+        cantidadDeNodos--;
       });
 
       // Para poder arrastrar los elementos al momento de clonarlos
@@ -199,35 +223,49 @@
       $("#diagram").droppable({
         drop: function (event, ui) {
           var id = uuidv4();
+
           var clone = $(ui.helper).clone(true);
           clone.attr("id", id);
           clone.appendTo(this);
           document.getElementById(id).innerHTML += contador;
           contador++;
+          cantidadDeNodos++;
           instance.draggable(id, { containment: true });
-
-          // Punto inicial del clone.
-          instance.addEndpoint(id, {
-            endpoint: ["Dot", { radius: 7 }],  // rectangle, blank, image
-            anchor: "Continuous",
-            isSource: true,
-            maxConnections: -1,
-            connectionType: "red-connection"
-          });
-
-          // Punto final del clone.
-          instance.addEndpoint(id, {
-            endpoint: ["Rectangle", { width: 12, height: 12 }],
-            anchor: "Continuous",
-            isTarget: true,
-            maxConnections: -1,
-            connectionType: "red-connection"
-          });
-
+          if (cantidadDeNodos != 1) {
+            // Punto inicial del clone.
+            instance.addEndpoint(id, {
+              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Continuous",
+              isSource: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+            // Punto final del clone.
+            instance.addEndpoint(id, {
+              endpoint: ["Rectangle", { width: 10, height: 10 }],
+              anchor: "Continuous",
+              isTarget: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+          }
+          else {
+            instance.addEndpoint(id, {
+              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Continuous",
+              isSource: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+          }
         }
       })
 
-      
+      instance.bind("connection", function (info) {
+        if (info.sourceId == info.targetId) {
+          instance.deleteConnection(info.connection);
+        }
+      });
     });
 
     function guardarValor() {
@@ -249,17 +287,57 @@
       if (!endpoint2.isTarget) {
         endpoint2 = instance.getEndpoints(trg)[1];
       }
-      console.log(endpoint1 + " " + endpoint2);
+      //console.log(endpoint1 + " " + endpoint2);
       instance.connect({
         source: endpoint1,
         target: endpoint2,
         type: "green-connection", data: { label: value }
       });
     }
+
+    //Cambiar color de la flecha
+    function cambiarColor(conexion, holgura) {
+        let value = conexion.valor;
+        let sourceId = conexion.llave.substr(0,36);
+        let targetId = conexion.llave.substr(-36);
+        var conn = instance.getConnections({
+            source: sourceId,
+            target: targetId
+        });
+        if (conn[0]) {
+          instance.deleteConnection(conn[0]);
+        }
+        if(holgura==0){
+          crearNuevaFlechaColor(sourceId, targetId, value, holgura, "blue-connection");
+        } else{
+          crearNuevaFlechaColor(sourceId, targetId, value, holgura, "green-connection");
+        }
+    }
+
+    function crearNuevaFlechaColor(src, trg, value, holgura, tipo) {
+      var endpoint1 = instance.getEndpoints(src)[0];
+      if (!endpoint1.isSource) {
+        endpoint1 = instance.getEndpoints(src)[1];
+      }
+      var endpoint2 = instance.getEndpoints(trg)[0];
+      if (!endpoint2.isTarget) {
+        endpoint2 = instance.getEndpoints(trg)[1];
+      }
+      var valor = "h = "+ holgura +"\n"+value;
+      instance.connect({
+        source: endpoint1,
+        target: endpoint2,
+        type: tipo, data: { label: valor }
+      });
+    }
     //Agregar movilidad a los elementos subidos.
     function drag(){
+      var flag = false;
       $(".jtk-endpoint").remove();
       $(".jtk-connector").remove();
+      if(tieneHolguras()){
+        flag = true;
+      }
       $(".jtk-overlay").remove();  
       instance.draggable($('.control'));
       agregarEndPoints();
@@ -270,6 +348,32 @@
       for(i=0; i<nodos.length; i++){
         contador = parseInt(nodos[i].innerHTML.substr(nodos[i].innerHTML.length-8, nodos[i].innerHTML.length))+1;
       }
+      cantidadDeNodos = nodos.length;
+      if(flag){
+        calcularAtributos('calcularAtributos');
+        calcularHolgura();
+      } else if(tieneAtributos()){
+        calcularAtributos('calcularAtributos');
+      }
+    }
+    function tieneAtributos(){
+      flag = false;
+      var valoresAtributos = document.getElementById('diagram').getElementsByTagName('td');
+      for(n=0; n<valoresAtributos.length; n++){
+        if(valoresAtributos[n].innerText != 0){
+          flag = true;
+          break;
+        }
+      }
+      return flag;
+    }
+    function tieneHolguras(){
+      var flag = false;
+      var diagrama = document.getElementById('diagram').innerHTML;
+      if(diagrama.includes('h =')){
+        flag = true;
+      }
+      return flag;
     }
     function eliminarBloqueComentario(){
       $(".contenedor-conexiones").remove();
@@ -290,7 +394,17 @@
     function agregarEndPoints(){
       var nodos = document.getElementsByClassName('control');
       for(i=1;i<nodos.length;i++){
-        instance.addEndpoint(nodos[i].id, {
+        if(i==1){
+          instance.addEndpoint(nodos[i].id, {
+              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Continuous",
+              isSource: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+        }else{
+          // Punto inicial del clone.
+          instance.addEndpoint(nodos[i].id, {
               endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
               anchor: "Continuous",
               isSource: true,
@@ -304,8 +418,9 @@
               isTarget: true,
               maxConnections: -1,
               connectionType: "red-connection"
-            });  
-      }  
+            });
+        }
+      }
     }
   </script>
 
@@ -334,14 +449,14 @@
     </div>
   </div>
 
-  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#matriz" style="margin-left: 20px;"
-    onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>-->
-
+  <div class="botones">
+    
+  </div>
   <!-- Modal - ventalla emergente - matriz generada -->
   <div class="modal fade" id="matriz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" id="matriz-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Matriz de adyacencia</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -351,7 +466,7 @@
         <div id="tablaMatriz" class="modal-body">
           <!-- Tabla de valores -->
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" id="matriz-footer">
           <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
         </div>
@@ -359,14 +474,11 @@
     </div>
   </div>
 
-  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#informacion" id="GenerarInfo"
-    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar información</button>-->
-
   <!-- Modal - ventalla emergente - informacion generada -->
   <div class="modal fade" id="informacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" id="informacion-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Información</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -376,23 +488,26 @@
         <div id="pdf" class="modal-body">
           <p>
             <strong>Descripción general:</strong></br>
-            El presente grafo es una demostración de diferentes nodos.
-            En dicho grafo el usuario agregó distintos nodos en el
-            espacio de trabajo designado. Posteriormente se realizaron las conexiones entre los nodos y se
-            modificaron los valores.</br></br>
+            El presente grafo es una demostración de los puntos de vacunación contra COVID-19 que hay en la ciudad de La
+            Paz y la distribución de vacunas de un punto de vacunación a otro. En dicho grafo el usuario agregó distintos
+            puntos de vacunación en el espacio de trabajo designado. Posteriormente se realizaron las conexiones entre los 
+            puntos de vacunación y se modificaron los valores.</br></br>
             <strong>Matriz de adyacencia:</strong></br>
           </p>
           <div id="matrizDeAdyacenciaInfo"></div>
+          <div id="infoCaminoCritico">
+            <!--Informacion del camino critico-->
+          </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" id="informacion-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
           <button type="button" class="btn btn-warning" data-dismiss="modal" id="generador">Generar PDF</button>
         </div>
       </div>
     </div>
   </div>
-  <!--Guardar y Subir-->
-  <!-- Modal - ventana emergente - Nombre del archivo -->
+
+  <!-- Modal - ventalla emergente - Nombre del archivo -->
   <div class="modal fade" id="inputNombreArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -403,9 +518,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div id="contactos" class="modal-body">
+        <div class="modal-body">
           <label style="margin-left:2vw;">Ingrese el nombre con el que desea guardar el archivo:</label>
-          <input style="margin-left:8vw;" type="text" id="nombreArchivo">
+          <input style="margin-left:10vw;" type="text" id="nombreArchivo">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="guardarGrafo()">Aceptar</button>
@@ -413,13 +528,7 @@
       </div>
     </div>
   </div>
-  <!-- Botones 
-  <button type="button" class="btn btn-warning" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar graphy</button>
-  <button type="button" class="btn btn-warning" id="subirGrafo">Subir graphy</button>
-  <input type="file" id="file-input" style="display: none;"/>
-  <button type="button" class="btn btn-warning" id="descargarManual"><a href="../resources/manuales/pdf/ManualDeUsuario_Grafos.pdf" target="_blank" style="color: white !important;">Manual</a></button>
-  <br>-->
-  <br>
 </body>
-<script type="text/javascript" src="../js/grafos.js"></script>
+<script type="text/javascript" src="../js/johnson.js"></script>
+
 </html>
