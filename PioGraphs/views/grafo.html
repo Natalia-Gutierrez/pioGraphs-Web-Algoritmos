@@ -46,16 +46,16 @@
     </li>
     <li>
       <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo"
-    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar Información</button>
+    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Explicación</button>
     </li>
     <li>
       <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="refresh">Borrar todo</button>
     </li>
-    <li>
+    <!--<li>
       <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar</button>
-    </li>
+    </li>-->
     <li>
-      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/helpGrafos.pdf" target="_blank" style="color: rgb(255, 255, 255) !important;">Help</a></button>
+      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/helpGrafos.pdf" target="_blank" style="color: rgb(255, 255, 255) !important;">?</a></button>
     </li>
   </ul>
 </nav>
@@ -368,18 +368,17 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Explicación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div id="pdf" class="modal-body">
           <p>
-            <strong>Descripción general:</strong></br>
-            El presente grafo es una demostración de diferentes nodos.
-            En dicho grafo el usuario agregó distintos nodos en el
-            espacio de trabajo designado. Posteriormente se realizaron las conexiones entre los nodos y se
-            modificaron los valores.</br></br>
+            <strong>¿Qué es un grafo?</strong></br>
+            En teoría de grafos, un grafo es una estructura matemática que consta de un conjunto de nodos o vértices, y un conjunto de aristas que conectan pares de nodos. Los grafos se utilizan para representar relaciones entre objetos o entidades, como redes de transporte, conexiones de internet o relaciones sociales.</br></br>
+            <strong>¿Qué es la matriz de adyacencia?</strong></br>
+            Una matriz de adyacencia es una forma de representar un grafo mediante una matriz bidimensional. La matriz tiene una fila y una columna para cada nodo del grafo, y la entrada (i,j) de la matriz indica si hay una arista que va del nodo i al nodo j. Si existe tal arista, la entrada se establece en 1 o se asigna el peso de la arista, y si no existe la entrada se establece en 0 o en un valor infinito si se trata de un grafo ponderado.</br></br>
             <strong>Matriz de adyacencia:</strong></br>
           </p>
           <div id="matrizDeAdyacenciaInfo"></div>

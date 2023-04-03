@@ -41,7 +41,7 @@
 <nav>
   <ul>
     <li style="position: absolute; top: 15px; left: 20px; width: 50px;" id="casita"><a href="./index.html">
-      <img style="width: 55px; height: 45px;" src="../resources/grafo/casa.png" alt="atras">
+      <img style="width: 45px; height: 45px;" src="../resources/grafo/casa.png" alt="atras">
     </a></li>
     <li>
       <!--Generar matriz-->
@@ -49,17 +49,18 @@
       </li>
     <li>
       <!--Generar información-->
-    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo" onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar información</button>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo" onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Explicación</button>
     </li>
     <li>
       <!--Generar atributos iniciales y finales, holgura y camino critico-->
-    <button type="button" class="btn btn-outline-dark" onclick="calcular('calcularAtributos')">Calcular atributos</button>
+    <button type="button" class="btn btn-outline-dark" onclick="calcular('calcularAtributos')">Calcular</button>
     </li>
-    
+    <li>
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="refresh">Borrar todo</button>
+    </li>
     <li>
       <!--Manual-->
-      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/ManualDeUsuario_Johnson.pdf" target="_blank" style="color: white !important;">Help</a></button>
-      
+      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/ManualDeUsuario_Johnson.pdf" target="_blank" style="color: white !important;">?</a></button>
     </li>
   </ul>
 </nav>
@@ -93,7 +94,7 @@
                 <td id="valor1">0</td><td id="valor2">0</td>
               </tr>
             </table>
-            Punto de vacunación
+            Pollito
           </div>
           
           <div id="flechas" class="justify-content-center" style="left: 50px; top: 50px">
@@ -112,8 +113,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
       <!-- Div para el diagrama -->
       <div class="col-md-10">
         <div id="habilitar-div" class="habilitar">
@@ -126,6 +125,10 @@
     </div>
   </div>
   <script>
+    let refresh = document.getElementById('refresh');
+    refresh.addEventListener('click', _ => {
+                location.reload();
+    })
     var primerNodoId = "";
     var contador = 1;
     var cantidadDeNodos = 0;
@@ -480,18 +483,15 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content" id="informacion-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Explicación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div id="pdf" class="modal-body">
           <p>
-            <strong>Descripción general:</strong></br>
-            El presente grafo es una demostración de los puntos de vacunación contra COVID-19 que hay en la ciudad de La
-            Paz y la distribución de vacunas de un punto de vacunación a otro. En dicho grafo el usuario agregó distintos
-            puntos de vacunación en el espacio de trabajo designado. Posteriormente se realizaron las conexiones entre los 
-            puntos de vacunación y se modificaron los valores.</br></br>
+            <strong>Algoritmo de Johnson:</strong></br>
+            El algoritmo de Johnson se basa en una transformación del grafo original que agrega un nuevo nodo y aristas con pesos no negativos a cada uno de los nodos existentes, para luego utilizar el algoritmo de Bellman-Ford para encontrar las distancias más cortas desde el nuevo nodo a todos los demás nodos en el grafo transformado. Luego, se utiliza esta información para calcular las distancias más cortas entre todos los pares de nodos.</br></br>
             <strong>Matriz de adyacencia:</strong></br>
           </p>
           <div id="matrizDeAdyacenciaInfo"></div>

@@ -75,7 +75,7 @@ function mostrarMatriz(ubicacion) {
     for (s = 0; s < j; s++) {
         html += `<th>${getNombreEstacion(s)}</th>`;
     }
-    html += `<th>Suma</th>`
+    html += `<th>Total</th>`
     html += `</tr>`;
 
     for (l = 0; l < j; l++) {
@@ -96,7 +96,7 @@ function mostrarMatriz(ubicacion) {
 
     //suma columnas
     var sumaGeneral = 0;
-    html += `<td>Suma</td>`
+    html += `<td>Total</td>`
     for (i = 0; i < j; i++) {
         var sumaC = 0;
         for (s2 = i; s2 < j * j; s2 += j) {

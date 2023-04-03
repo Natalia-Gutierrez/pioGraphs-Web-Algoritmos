@@ -53,7 +53,7 @@ body {
   cursor: move;
   height: fit-content;
   height: -moz-max-content;
-  background-color: rgb(227, 252, 253);
+  background-color: white;
   font-size: 10px;
 }
 
