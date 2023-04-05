@@ -137,7 +137,7 @@ td,th {
 
 nav {
   display: flex;
-  background: linear-gradient(#d09306, #ecab0f, #f7d547);
+  background: #f7d547;
   justify-content: right;
   position: fixed;
   width: 100%;
