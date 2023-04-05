@@ -128,10 +128,10 @@ function funcionFondoCB() {
     var checkBox = document.getElementById("flexCheckDefault");
     var bg = document.getElementById("diagram");
     if (checkBox.checked == true) {
-        bg.style.background = "none";
-        bg.style.backgroundColor = "#ffffff"
+        bg.style.backgroundImage = "url('../resources/grafo/cuadricula.png')";
     } else {
-        bg.style.backgroundImage = "url('../resources/images/Imagen1.png')";
+        bg.style.background = "none";
+        bg.style.backgroundColor = "#ffffff";
     }
 }
 //Colocarle nombre al nodo.

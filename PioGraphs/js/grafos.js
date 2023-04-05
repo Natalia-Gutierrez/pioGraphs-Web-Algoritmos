@@ -150,10 +150,10 @@ function funcionFondoCB() {
     var checkBox = document.getElementById("flexCheckDefault");
     var bg = document.getElementById("diagram");
     if (checkBox.checked == true) {
-        bg.style.background = "none";
-        bg.style.backgroundColor = "#ffffff"
+        bg.style.backgroundImage = "url('../resources/grafo/cuadricula.png')";
     } else {
-        bg.style.backgroundImage = "url('../resources/grafo/punteada.jpeg')";
+        bg.style.background = "none";
+        bg.style.backgroundColor = "#ffffff";
     }
 }
 
