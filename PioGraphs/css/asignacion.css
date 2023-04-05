@@ -1,0 +1,331 @@
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+#diagram,
+#toolbox {
+    margin: 20px 0;
+    border-width: 2px;
+    border-style: solid;
+    border-color: lightgrey;
+}
+
+body {
+  background-color: rgb(240, 239, 239) !important;
+}
+
+#toolbox {
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px;
+    flex-flow: row wrap;
+    align-content: flex-start; 
+    background: linear-gradient(#ffffff, #ffffff);
+    border-radius: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+.row {
+  margin-top: 90px;
+}
+
+#diagram {
+  background: url("../resources/images/Imagen1.png") no-repeat;
+  border-radius: 15px;
+  height: 88vh !important;
+}
+
+#contenedor-cb {
+  float: right;
+  margin-right: 10%;
+}
+
+#nombreEmpresa {
+  font-family: "Grand Hotel", cursive;
+  font-size: 50px;
+}
+.control {
+  border-color: #f7d547;
+  /* box-shadow: 0 6px 15px rgba(88, 92, 92, 0.295); */
+  border-radius: 50px;
+  border-width: 2px;
+  border-style: solid;
+  width: 100px;
+  text-align: center;
+  cursor: move;
+  height: 100px;
+  /* height: -moz-max-content; */
+  /* background-color: rgb(50, 204, 63); */
+  font-size: 10px;
+}
+
+.control img{
+  width: 70%;
+  height: 70%;
+  margin-top:0 !important;
+  /* position: absolute; */
+}
+
+.control h6{
+  font-size: 10px;
+  margin-top: -3px;
+}
+
+#diagram .control {
+  position: absolute;
+}
+
+.window {
+  z-index: 20;
+}
+
+.jtk-connector {
+  z-index: 4;
+}
+
+.jtk-endpoint {
+  z-index: 5;
+}
+
+.jtk-overlay {
+  z-index: 6;
+  background-color: #cde0b7c0;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.custom-menu {
+  z-index: 1000;
+  position: absolute;
+  background-color: #c0c0c0;
+  border: 1px solid black;
+  padding: 2px;
+}
+
+#toolbox .control {
+  margin: 10px 5px;
+}
+
+.control img {
+  margin-top: 15px;
+}
+
+#tablaMatriz {
+  margin: 0 auto;
+}
+table,
+td,
+th {
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+td,
+th {
+  padding: 3px;
+  text-align: center;
+}
+
+#exampleModalLabel {
+  font-family: "ZCOOL QingKe HuangYou", cursive;
+  font-size: 3vw;
+}
+
+#pdf {
+  font-family: "Kreon", serif;
+}
+nav {
+  display: flex;
+  background: linear-gradient(#d09306, #ecab0f, #f7d547);
+  justify-content: right;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  top: 0;
+}
+
+nav ul, #logos, #empresa {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items:  center;
+    padding: 0;
+    margin-top: 1%;
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+
+.nav-item {
+  margin: 0px 50px;
+}
+
+li {
+  text-decoration: none;
+}
+
+nav li {
+  color: #ffffff;
+  padding: 5px;
+}
+.custom-menu{
+    display: flex;
+    flex-direction: column;
+    background-color: #d3dfdf;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px #616961 solid;
+}
+
+#matriz-content{
+ overflow: auto;
+ max-height: 550px;
+}
+
+#matriz-footer{
+  justify-content: flex-start;
+}
+
+#informacion-content{
+  overflow: auto;
+  max-height: 550px;
+}
+ 
+#informacion-footer{
+ justify-content: flex-start;
+}
+
+#contactos{
+  max-height: 550px;
+  overflow: auto;
+}
+
+/*cartas*/
+ *, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.slide-container {
+  margin: auto;
+  text-align: center;
+}
+
+.wrapper {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.wrapper:focus {
+  outline: 0;
+}
+
+.p-card {
+  background: white;
+  width: 300px;
+  display: inline-block;
+  margin: auto;
+  border-radius: 19px;
+  position: relative;
+  text-align: center;
+  box-shadow: -1px 15px 30px -12px black;
+  z-index: 9999;
+}
+
+.card__image {
+  position: relative;
+  height: 230px;
+  margin-bottom: 35px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.card__image--person {
+  background: url('https://concepto.de/wp-content/uploads/2014/08/programacion-2-e1551291144973.jpg');
+  background-size: cover;
+}
+
+.card__image--person img {
+  height: 230px;
+}
+
+.card__title {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.card__title--person {
+  color: #4facff;
+}
+
+.card__name {
+  font-size: 26px;
+  color: black;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.card__description {
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.card__contact--person {
+  background: #4facff;
+}
+
+.card__contact--person .one-third {
+  border-right: 1px solid #ff00c8;
+}
+
+.card__contact {
+  color: white;
+  font-weight: 700;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.card__contact .one-third {
+  width: 33%;
+  float: left;
+  padding: 20px 15px;
+  align-items: center;
+}
+
+.card__contact .one-third img{
+  height: 90%;
+  width: 90%;
+}
+
+.card__contact .no-border {
+  border-right: none;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+/*Fin Estilo cartas*/
+
+
+/*Parte de habilitar*/
+.habilitar {
+  background-color: #f7d547;
+  text-align: right;
+  display:none;
+}
+#botonMovilidad{
+  margin: 5px;
+}
+.habilitar-activo {
+  display: block;
+} 
+#nombreArchivo{
+  border: #616961 0.1 solid;
+  border-radius: 5px;
+}
+#casita:hover{
+  background-color: #6a676d42;
+}

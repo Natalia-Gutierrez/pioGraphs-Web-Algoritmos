@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!--Dentro de la etiqueta <head> va informacion que mayormente el usuario no puede ver.
---><head>
+
+<!--Dentro de la etiqueta <head> va informacion que mayormente el usuario no puede ver.-->
+<head>
   <meta charset="UTF-8">
-  <title>Grafos Pollitos</title>
+  <title>Grafos - Algoritmo NorthWest</title>
 
   <!--Fonts-->
   <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Lobster&family=Roboto+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Kreon&family=Laila:wght@500&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+
+  <!--La siguiente etiqueta permite relacionar el archivo htlm con el css-->
+  <link href="./cardsStyle.sass">
+  <link rel="stylesheet" href="../css/northwest.css">
 
   <!--La siguiente etiqueta permite relacionar el archivo htlm con la libreria bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -26,93 +31,115 @@
   <script src="../node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!--Icono -->
-  <link rel="shortcut icon" type="image/x-icon" href="../resources/icon.png">
-  
-  <!--La siguiente etiqueta permite relacionar el archivo htlm con el css-->
-  <link rel="stylesheet" href="../css/grafo.css">
+  <!-- Icono -->
+  <link rel="shortcut icon" type="image/x-icon" href="../resources/modelado.ico">
 </head>
 
-<!--Navegación principal -->
+<!-- Navegación principal -->
 <nav>
   <ul>
     <li style="position: absolute;  left: 20px;" id="casita"><a href="./index.html">
-      <img style="width: 55px; height: 45px;" src="../resources/grafo/casa.png" alt="atras"></a>
+        <img style="width: 45px; height: 45px;" src="../resources/grafo/casa.png" alt="atras"></a>
+      </li>
+    <li>
+        <!-- Generar matriz -->
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#matriz" onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>  
     </li>
     <li>
-      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#matriz"
-        onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>
+        <!-- Ingresar ofertas y demandas -->
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#ofertaDemanda" onclick="mostrarInputOfertasyDemandas()">Ingresar ofertas y demandas</button>     
     </li>
     <li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#informacion" id="GenerarInfo"
-    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Explicación</button>
+        <!-- Northwest -->
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#minimizacion" onclick="mostrarMaximizacion(false)">Minimización</button>
     </li>
     <li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="refresh">Borrar todo</button>
+        <!-- Northwest -->
+        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#minimizacion" onclick="mostrarMaximizacion(true)">Maximización</button>
     </li>
-    <!--<li>
-      <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar</button>
+    <li>
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="refresh">Borrar todo</button>
+          </li>
+        <!-- Guardar
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar graphy</button>
     </li>-->
     <li>
-      <button type="button" class="btn btn-dark" id="descargarManual"><a href="../resources/manuales/pdf/helpGrafos.pdf" target="_blank" style="color: rgb(255, 255, 255) !important;">?</a></button>
+        <!-- Manual -->
+        <button type="button" class="btn btn-dark" id="descargarManual"><a style="color: white !important;" href="../resources/manuales/pdf/ManualDeUsuario_NorthWest.pdf" target="_blank">?</a></button>
     </li>
+    <!-- Subir graphy 
+    <button type="button" class="btn btn-outline-dark" id="subirGrafo">Subir graphy</button>
+    <input type="file" id="file-input" style="display: none;"/>-->
+
   </ul>
 </nav>
+
+<!--Dentro de la etiqueta <body> va a contenerse todo lo que es el cuerpo de lo que es nuestro html
+  (el usuario lo va a ver).-->
 
 <body>
   <!-- Contenedor principal -->
   <div class="container-fluid">
     <div class="row">
-      <!-- Div para el diagrama -->
-      
-      <div class="col-md-10">
-        <div id="habilitar-div" class="habilitar">
-          <button id="botonMovilidad" class="btn btn-success" onclick="drag()">Habilitar edición</button>
-        </div>
-        <div id="diagram" style="height: 90vh; position: relative">
-        </div>
-      </div>
       <!-- Div para la caja de herrramientas -->
       <div class="col-md-2">
         <div id="toolbox" class="justify-content-center">
-          <h3 id="elementos"><strong>Herramientas</strong></h3>
+          <h3><strong>Herramientas</strong></h3>
           <br><br>
-          <ul id="lista-ref1" style="list-style: none; margin-left: -10%;">
+          <ul style="font-size: 1.2vw; list-style: none; margin-left: -20%;">
             <li>◻️ Entrada de enlaces</li>
             <br>
             <li>⚪ Salida de enlaces</li>
           </ul>
-          <div>
-            <br>
-            <div class="flecha"><img src="../resources/grafo/fecha_sinconectar.png" width="30px">Sin valor de atributo</div>
-            <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">Con valor de atributo</div>
+          <div class="control new origen"  id="cajita">
+            <!-- Estacion vacunas -->
+            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="45px" height="45px">
+            <h6>Origen</h6>
           </div>
-          <div class="control new" style="left: 50px; top: 50px" id="cajita">
-            <!-- Nodos Pollitos-->
-            <img src="../resources/grafo/nodoPio.png" alt="estacion" width="70px" height="70px">
-            Pollito
+          <div class="control new destino"  id="cajita">
+            <!-- Estacion vacunas -->
+            <img src="../resources/grafo/granja.png" alt="estacion" width="45px" height="45px">
+            <h6>Destino</h6>
+          </div>
+
+          <div>
+            <div class="flecha"><img src="../resources/grafo/fecha_sinconectar.png" width="30px">Sin atributo</div>
+            <div class="flecha"><img src="../resources/grafo/fecha_conecta.png" width="30px">Con atributo</div>
           </div>
           <!-- Checkbox -->
-          <div id="contenedor-cb">
-            <div class="form-check" id="checkbox-fondo">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="funcionFondoCB()">
-              <label class="form-check-label" for="flexCheckDefault">
-                Fondo Blanco
-              </label>
+            <div id="contenedor-cb">
+                <div class="form-check" id="checkbox-fondo">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="funcionFondoCB()">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Fondo Blanco
+                </label>
+                </div>
             </div>
-          </div>
+        </div>
+      </div>
+
+      <!-- Div para el diagrama -->
+      <div class="col-md-10">
+        <div id="habilitar-div" class="habilitar">
+          <button id="botonMovilidad" class="btn btn-success" onclick="drag()">Habilitar edición</button>
+        </div>
+        <div id="diagram" style="height: 80vh !important; position: relative">
+          <!--Cajitas -- holguras-->
+          <div id="holgurasCuadros"></div>
         </div>
       </div>
     </div>
   </div>
-  
   <script>
     let refresh = document.getElementById('refresh');
     refresh.addEventListener('click', _ => {
                 location.reload();
     })
-    var contador = 1;
+    
+    var primerNodoId = "";
+    var contadorOrigen = 1;
+    var contadorDestino = 1;
+    var cantidadDeNodos = 0;
     // https://stackoverflow.com/a/2117523
     function uuidv4() {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -128,14 +155,14 @@
         "green-connection": {
           paintStyle: { stroke: "orange", strokeWidth: 2 },
           hoverPaintStyle: { stroke: "#FF8000", strokeWidth: 3 },
-          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
-          ["Label", { label: "", location: 0.25 }]]
-        }//----------------------------------------------------------------------------------//
-        ,"red-connection": {
-          paintStyle: { stroke: "black",strokeWidth: 2 },
+          ["Label", { label: "", labelLocation: 0.5 }]]
+        }
+        , "red-connection": {
+          paintStyle: { stroke: "black", strokeWidth: 2 },
           hoverPaintStyle: { stroke: "#000000", strokeWidth: 3 },
-          connector: "StateMachine", //Bezier, Flowchart, Straight, StateMachine
+          connector: "Straight", //Bezier, Flowchart, Straight, StateMachine
           overlays: [["Arrow", { location: 0.9, width: 20, length: 20, foldback: 0.9 }],
           ["Label", { label: "${label}", location: 0.25 }]]
         }
@@ -186,6 +213,7 @@
         nodo = window.selectedControl;
         instance.remove(nodo);
         eliminarNodo(nodo);
+
       });
 
       // Para poder arrastrar los elementos al momento de clonarlos
@@ -199,35 +227,41 @@
       $("#diagram").droppable({
         drop: function (event, ui) {
           var id = uuidv4();
+
           var clone = $(ui.helper).clone(true);
           clone.attr("id", id);
           clone.appendTo(this);
-          document.getElementById(id).innerHTML += contador;
-          contador++;
+          var origen = document.getElementById(id).classList.contains( 'origen' );
+          if (origen){
+            document.getElementById(id).getElementsByTagName('h6')[0].innerText += (" "+contadorOrigen);
+          contadorOrigen++;
+          cantidadDeNodos++;
           instance.draggable(id, { containment: true });
-
-          // Punto inicial del clone.
-          instance.addEndpoint(id, {
-            endpoint: ["Dot", { radius: 7 }],  // rectangle, blank, image
-            anchor: "Continuous",
-            isSource: true,
-            maxConnections: -1,
-            connectionType: "red-connection"
-          });
-
-          // Punto final del clone.
-          instance.addEndpoint(id, {
-            endpoint: ["Rectangle", { width: 12, height: 12 }],
-            anchor: "Continuous",
-            isTarget: true,
-            maxConnections: -1,
-            connectionType: "red-connection"
-          });
-
+            // Punto inicial del clone.
+            instance.addEndpoint(id, {
+              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Center",
+              isSource: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+          }
+          else{
+            document.getElementById(id).getElementsByTagName('h6')[0].innerText += (" "+contadorDestino);
+          contadorDestino++;
+          cantidadDeNodos++;
+          instance.draggable(id, { containment: true });
+            // Punto final del clone.
+            instance.addEndpoint(id, {
+              endpoint: ["Rectangle", { width: 10, height: 10 }],
+              anchor: "Center",
+              isTarget: true,
+              maxConnections: -1,
+              connectionType: "red-connection"
+            });
+          }
         }
       })
-
-      
     });
 
     function guardarValor() {
@@ -249,13 +283,14 @@
       if (!endpoint2.isTarget) {
         endpoint2 = instance.getEndpoints(trg)[1];
       }
-      console.log(endpoint1 + " " + endpoint2);
+      //console.log(endpoint1 + " " + endpoint2);
       instance.connect({
         source: endpoint1,
         target: endpoint2,
         type: "green-connection", data: { label: value }
       });
     }
+
     //Agregar movilidad a los elementos subidos.
     function drag(){
       $(".jtk-endpoint").remove();
@@ -264,15 +299,59 @@
       instance.draggable($('.control'));
       agregarEndPoints();
       generarConexiones();
+      //Nuevo
+      agregarOfertas();
+      agregarDemandas();
+      mostrarMatriz();
+      //
       eliminarBloqueComentario();
       document.querySelector("#habilitar-div").classList.remove('habilitar-activo');
-      var nodos = document.getElementsByClassName('control');
-      for(i=0; i<nodos.length; i++){
-        contador = parseInt(nodos[i].innerHTML.substr(nodos[i].innerHTML.length-8, nodos[i].innerHTML.length))+1;
+      var nodosOrigen = document.getElementsByClassName('origen');
+      var nodosDestino = document.getElementsByClassName('destino');
+      //Actualizando contador nodos de origen
+      for(i=1; i<nodosOrigen.length; i++){
+        var nombreNodo = nodosOrigen[i].getElementsByTagName('h6')[0].innerText;
+        var numero = parseInt(nombreNodo.substr(7, nombreNodo.length));
+        console.log(nombreNodo.substr(7, nombreNodo.length));
+        contadorOrigen = numero+1;
+      }
+      //Actualizando contador nodos de destino
+      for(i=1; i<nodosDestino.length; i++){
+        var nombreNodo = nodosDestino[i].getElementsByTagName('h6')[0].innerText;
+        var numero = parseInt(nombreNodo.substr(8, nombreNodo.length));
+        contadorDestino = numero+1;
       }
     }
     function eliminarBloqueComentario(){
       $(".contenedor-conexiones").remove();
+      $(".contenedor-ofertas").remove();
+      $(".contenedor-demandas").remove();
+      
+    }
+
+    function agregarOfertas(){
+      var contenido = document.getElementsByClassName('contenedor-ofertas')[0].innerHTML;
+      var cadena = contenido.substring(contenido.indexOf('id:'),contenido.indexOf("|-->"));
+      var elementos = cadena.split('|');
+      for(n=0;n<elementos.length;n++){
+        var id = elementos[n].substring(elementos[n].indexOf(':')+1,elementos[n].indexOf(','));
+        var valor = elementos[n].substring(elementos[n].indexOf('oferta:')+7,elementos[n].length);
+        console.log(id);
+        console.log(valor);
+        guardarOferta(id, valor); 
+      }
+    }
+    function agregarDemandas(){
+      var contenido = document.getElementsByClassName('contenedor-demandas')[0].innerHTML;
+      var cadena = contenido.substring(contenido.indexOf('id:'),contenido.indexOf("|-->"));
+      var elementos = cadena.split('|');
+      for(n=0;n<elementos.length;n++){
+        var id = elementos[n].substring(elementos[n].indexOf(':')+1,elementos[n].indexOf(','));
+        var valor = elementos[n].substring(elementos[n].indexOf('demanda:')+8,elementos[n].length);
+        console.log(id);
+        console.log(valor);
+        guardarDemanda(id, valor); 
+      }
     }
     function generarConexiones(){
       var htmlDiagram = document.getElementById("diagram").innerHTML;
@@ -288,24 +367,26 @@
       }
     }
     function agregarEndPoints(){
-      var nodos = document.getElementsByClassName('control');
-      for(i=1;i<nodos.length;i++){
-        instance.addEndpoint(nodos[i].id, {
-              endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
-              anchor: "Continuous",
+      var nodosOrigen = document.getElementsByClassName('origen');
+      var nodosDestino = document.getElementsByClassName('destino');
+      for(i=1;i<nodosOrigen.length;i++){
+        instance.addEndpoint(nodosOrigen[i].id, {
+            endpoint: ["Dot", { radius: 5 }],  // rectangle, blank, image
+              anchor: "Center",
               isSource: true,
               maxConnections: -1,
               connectionType: "red-connection"
-            });
-            // Punto final del clone.
-            instance.addEndpoint(nodos[i].id, {
-              endpoint: ["Rectangle", { width: 10, height: 10 }],
-              anchor: "Continuous",
+          });
+      }
+      for(i=1;i<nodosDestino.length;i++){
+          instance.addEndpoint(nodosDestino[i].id, {
+            endpoint: ["Rectangle", { width: 10, height: 10 }],
+              anchor: "Center",
               isTarget: true,
               maxConnections: -1,
               connectionType: "red-connection"
-            });  
-      }  
+        });
+      }   
     }
   </script>
 
@@ -328,20 +409,17 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="guardarValor()">Guardar</button>
+          <button type="button" class="btn btn-outline-dark" data-dismiss="modal" onclick="guardarValor()">Guardar</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#matriz" style="margin-left: 20px;"
-    onclick="mostrarMatriz('#tablaMatriz')">Generar matriz</button>-->
-
   <!-- Modal - ventalla emergente - matriz generada -->
   <div class="modal fade" id="matriz" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" id="matriz-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Matriz de adyacencia</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -351,7 +429,7 @@
         <div id="tablaMatriz" class="modal-body">
           <!-- Tabla de valores -->
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" id="matriz-footer">
           <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
         </div>
@@ -359,38 +437,69 @@
     </div>
   </div>
 
-  <!--<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#informacion" id="GenerarInfo"
-    onclick="mostrarMatriz('#matrizDeAdyacenciaInfo')">Generar información</button>-->
-
-  <!-- Modal - ventalla emergente - informacion generada -->
-  <div class="modal fade" id="informacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Modal - ventalla emergente - Ingreso de Ofertas y Demandas -->
+  <div class="modal fade" id="ofertaDemanda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" id="matriz-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Explicación</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ofertas - Demandas</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div id="pdf" class="modal-body">
-          <p>
-            <strong>¿Qué es un grafo?</strong></br>
-            En teoría de grafos, un grafo es una estructura matemática que consta de un conjunto de nodos o vértices, y un conjunto de aristas que conectan pares de nodos. Los grafos se utilizan para representar relaciones entre objetos o entidades, como redes de transporte, conexiones de internet o relaciones sociales.</br></br>
-            <strong>¿Qué es la matriz de adyacencia?</strong></br>
-            Una matriz de adyacencia es una forma de representar un grafo mediante una matriz bidimensional. La matriz tiene una fila y una columna para cada nodo del grafo, y la entrada (i,j) de la matriz indica si hay una arista que va del nodo i al nodo j. Si existe tal arista, la entrada se establece en 1 o se asigna el peso de la arista, y si no existe la entrada se establece en 0 o en un valor infinito si se trata de un grafo ponderado.</br></br>
-            <strong>Matriz de adyacencia:</strong></br>
-          </p>
-          <div id="matrizDeAdyacenciaInfo"></div>
+        <div id="ofertas" class="modal-body">
+          <!-- Tabla de valores -->
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-          <button type="button" class="btn btn-warning" data-dismiss="modal" id="generador">Generar PDF</button>
+        <div id="demandas" class="modal-body">
+          <!-- Tabla de valores -->
+        </div>
+        <div class="modal-footer" id="matriz-footer">
+          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="guardarOfDem()">Aceptar</button>
         </div>
       </div>
     </div>
   </div>
-  <!--Guardar y Subir-->
+
+  <!-- Modal - ventalla emergente - Matriz de asignacion generada -->
+  <div class="modal fade" id="minimizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content" id="matriz-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">NorthWest</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <h6>Matriz de adyacencia:</h6>
+          <center>
+            <div id="matriz-minimizacion" class="modal-body">
+              <!-- Tabla de valores -->
+            </div>
+          </center>
+          <h6>Función de optimización:</h6>
+          <center>
+            <div id="funcion-costo-minimo" class="modal-body">
+              <!-- Tabla de valores -->
+            </div>
+          </center>
+          <h6>El resultado es:</h6>
+          <center>
+            <div id="calculo-resultado-minimo" class="modal-body">
+              <!-- Tabla de valores -->
+            </div>
+          </center>
+        <div class="modal-footer" id="matriz-footer">
+          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>-->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Guardar y Subir Graphy-->
   <!-- Modal - ventana emergente - Nombre del archivo -->
   <div class="modal fade" id="inputNombreArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -412,13 +521,6 @@
       </div>
     </div>
   </div>
-  <!-- Botones 
-  <button type="button" class="btn btn-warning" data-toggle="modal" id="guardarGrafo" data-target="#inputNombreArchivo" onclick="">Guardar graphy</button>
-  <button type="button" class="btn btn-warning" id="subirGrafo">Subir graphy</button>
-  <input type="file" id="file-input" style="display: none;"/>
-  <button type="button" class="btn btn-warning" id="descargarManual"><a href="../resources/manuales/pdf/ManualDeUsuario_Grafos.pdf" target="_blank" style="color: white !important;">Manual</a></button>
-  <br>-->
-  <br>
 </body>
-<script type="text/javascript" src="../js/grafos.js"></script>
+<script type="text/javascript" src="../js/northwest.js"></script>
 </html>
