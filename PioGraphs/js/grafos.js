@@ -51,7 +51,7 @@ function mostrarMatriz(ubicacion) {
     console.log(baseDatos);
     var elementos = document.getElementsByClassName("control");
     var vertices = [];
-    for (i = 1; i < elementos.length; i++) {
+    for (i = 0; i < elementos.length; i++) {
         vertices.push(elementos[i].id);
     }
 
