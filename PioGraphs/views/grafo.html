@@ -91,8 +91,11 @@
           <div class="control new" style="left: 50px; top: 50px" id="cajita">
             <!-- Nodos Pollitos-->
             <img src="../resources/grafo/nodoPio.png" alt="estacion" width="70px" height="70px">
-            Pollito
+            
           </div>
+          <!--Nombre Pollito -->
+          <input type="text" id="nombreNodo">
+            
           <!-- Checkbox -->
           <div id="contenedor-cb">
             <div class="form-check" id="checkbox-fondo">
@@ -200,9 +203,10 @@
         drop: function (event, ui) {
           var id = uuidv4();
           var clone = $(ui.helper).clone(true);
+          var name = document.getElementById("nombreNodo").value
           clone.attr("id", id);
           clone.appendTo(this);
-          document.getElementById(id).innerHTML += contador;
+          document.getElementById(id).innerHTML += name;
           contador++;
           instance.draggable(id, { containment: true });
 

@@ -159,7 +159,7 @@ function funcionFondoCB() {
 
 function getNombreEstacion(index) {
     nodos = document.getElementsByClassName("control");
-    contenido = nodos[index + 1].innerHTML;
+    contenido = nodos[index + 0].innerHTML;
     nombre = contenido.substr(141, contenido.length);
     return nombre;
 }
